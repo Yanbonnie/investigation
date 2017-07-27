@@ -9,7 +9,7 @@
 </head>
 <body>    
     <div class="index wrap" id="index-box">     
-        <div class="index_page" v-show="false">
+        <div class="index_page">
             <span class="circle wran"></span>
             <span class="circle2 wran"></span>      
             <img class="logo" src="images/logo.png" alt="">
@@ -44,7 +44,7 @@
                         <img class="ban" src="images/ban.png" alt="">
                         <img class="person" src="images/person.png" alt="">
                         <!-- <span class="pre_btn"><img src="images/pre.png" alt=""></span> -->
-                        <span class="next_btn" @click="nextHandle(1)"><img src="images/next_btn.png" alt=""></span>
+                        <span class="next_btn center" @click="nextHandle(1)"><img src="images/next_btn.png" alt=""></span>
                     </div>
                 </li>
                 <li class="page3">
@@ -72,7 +72,7 @@
                         <img class="ban" src="images/ban.png" alt="">
                         <img class="person" src="images/person.png" alt="">
                         <!-- <span class="pre_btn"><img src="images/pre.png" alt=""></span> -->
-                        <span class="next_btn" @click="nextHandle(2)"><img src="images/next_btn.png" alt=""></span>
+                        <span class="next_btn center" @click="nextHandle(2)"><img src="images/next_btn.png" alt=""></span>
                     </div>
                 </li>
                 <li class="page5">
@@ -179,7 +179,7 @@
                 data:{
                     "tipStatus":false,
                     "infoStatus":false,
-                    "slide01Status":true,
+                    "slide01Status":false,
                     "classifyOne":[
                         {
                             "title":"您目前所在的机构是:",
