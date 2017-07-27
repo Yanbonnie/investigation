@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">    
+    <title>TEST</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>    
+    <div class="index wrap" id="index-box">     
+        <div class="index_page" v-show="false">
+            <span class="circle wran"></span>
+            <span class="circle2 wran"></span>      
+            <img class="logo" src="images/logo.png" alt="">
+            <img class="niu" src="images/niu.png" alt="">
+            <img class="title" src="images/title.png" alt="">
+            <span class="start" @click="infoStatus = true"><img src="images/start.png" alt=""></span>
+        </div>     
+        <div id="slide01" class="tabSlide" v-show="slide01Status">					 
+            <ul class="content">
+                <li class="page1">
+                    <div class="cont hide">
+                        <span class="circle wran"></span>
+                        <span class="circle2 wran"></span>   
+                        <img class="part" src="images/first.png" alt="">  
+                        <span class="next-btn" @click="nextHandle(0)"><img src="images/next.png" alt=""></span>                   
+                    </div>
+                </li>
+                <li class="page2">
+                    <div class="cont hide">
+                        <div class="question">
+                            <div class="question_box">
+                                <div class="classify" v-for="(item,index) in classifyOne" :key="index">
+                                    <h3>{{(index+1)+'、'}}{{item.title}}</h3>
+                                    <dl>
+                                        <dd v-for="(val,val_index) in item.selectList" @click="selectHandle(item,val.value)">
+                                            <p><b :class="[item.selectVal == val.value ? 'active' : '']"></b><label>{{val.value+'、'}}</label><span>{{val.title}}</span></p>
+                                        </dd>
+                                    </dd>
+                                </div>
+                            </div>
+                        </div>
+                        <img class="ban" src="images/ban.png" alt="">
+                        <img class="person" src="images/person.png" alt="">
+                        <!-- <span class="pre_btn"><img src="images/pre.png" alt=""></span> -->
+                        <span class="next_btn" @click="nextHandle(1)"><img src="images/next_btn.png" alt=""></span>
+                    </div>
+                </li>
+                <li class="page3">
+                    <div class="cont hide">
+                        <span class="circle wran"></span>
+                        <span class="circle2 wran"></span>
+                        <img class="part" src="images/second.png" alt="">  
+                        <span class="next-btn" @click="nextHandle(0)"><img src="images/next.png" alt=""></span>        
+                    </div>
+                </li>
+                <li class="page4">
+                    <div class="cont hide">
+                        <div class="question">
+                            <div class="question_box">
+                                <div class="classify" v-for="(item,index) in classifyTwo_one" :key="index">
+                                    <h3>{{(index+6)+'、'}}{{item.title}}</h3>
+                                    <dl>
+                                        <dd v-for="(val,val_index) in item.selectList" @click="selectHandle(item,val.value)">
+                                            <p><b :class="[item.selectVal == val.value ? 'active' : '']"></b><label>{{val.value+'、'}}</label><span>{{val.title}}</span></p>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <img class="ban" src="images/ban.png" alt="">
+                        <img class="person" src="images/person.png" alt="">
+                        <!-- <span class="pre_btn"><img src="images/pre.png" alt=""></span> -->
+                        <span class="next_btn" @click="nextHandle(2)"><img src="images/next_btn.png" alt=""></span>
+                    </div>
+                </li>
+                <li class="page5">
+                    <div class="cont hide">
+                        <div class="question">
+                            <div class="question_box">
+                                <div class="classify" v-for="(item,index) in classifyTwo_two" :key="index">
+                                    <h3>{{(index+14)+'、'}}{{item.title}}</h3>
+                                    <dl>
+                                        <dd v-for="(val,val_index) in item.selectList" @click="selectHandle(item,val.value)">
+                                            <p><b :class="[item.selectVal == val.value ? 'active' : '']"></b><label>{{val.value+'、'}}</label><span>{{val.title}}</span></p>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <img class="ban" src="images/ban.png" alt="">
+                        <img class="person" src="images/person.png" alt="">
+                        <span class="pre_btn" @click="preHandle"><img src="images/pre.png" alt=""></span>
+                        <span class="next_btn" @click="nextHandle(3)"><img src="images/next_btn.png" alt=""></span>
+                    </div>
+                </li>                
+                <li class="page6">
+                    <div class="cont hide">
+                        <div class="question">
+                            <div class="question_box">
+                                <div class="classify" v-for="(item,index) in classifyTwo_three" :key="index">
+                                    <h3>{{(index+20)+'、'}}{{item.title}}</h3>
+                                    <dl>
+                                        <dd v-for="(val,val_index) in item.selectList" @click="selectHandle(item,val.value)">
+                                            <p><b :class="[item.selectVal == val.value ? 'active' : '']"></b><label>{{val.value+'、'}}</label><span>{{val.title}}</span></p>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <img class="ban" src="images/ban.png" alt="">
+                        <img class="person" src="images/person.png" alt="">
+                        <span class="pre_btn" @click="preHandle"><img src="images/pre.png" alt=""></span>
+                        <span class="next_btn" @click="nextHandle(4)"><img src="images/next_btn.png" alt=""></span>
+                    </div>
+                </li>
+                <li class="page7">
+                    <div class="cont hide">
+                        <div class="question">
+                            <div class="question_box">
+                                <div class="classify" v-for="(item,index) in classifyTwo_four" :key="index">
+                                    <h3>{{(index+26)+'、'}}{{item.title}}</h3>
+                                    <dl>
+                                        <dd v-for="(val,val_index) in item.selectList" @click="selectHandle(item,val.value)">
+                                            <p><b :class="[item.selectVal == val.value ? 'active' : '']"></b><label>{{val.value+'、'}}</label><span>{{val.title}}</span></p>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <img class="ban" src="images/ban.png" alt="">
+                        <img class="person" src="images/person.png" alt="">
+                        <span class="pre_btn" @click="preHandle"><img src="images/pre.png" alt=""></span>
+                        <span class="next_btn" @click="nextHandle(5)"><img src="images/next_btn.png" alt=""></span>
+                    </div>
+                </li>
+                <li class="page8">
+                    <div class="cont hide">
+                        <span class="circle wran"></span>
+                        <span class="circle2 wran"></span>  
+                        <div class="result">
+                            <img src="images/result.png" alt="">
+                            <img class="love pulse" src="images/love.png" alt="">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--基本信息弹框1-->
+        <div class="html-cover info-cover" v-show="infoStatus">
+            <div class="html-box info-box">
+                 <b class="close" @click="infoStatus = false"></b>
+                 <div class="formBox">
+                    <input type="text" name="" placeholder="请输入您的工号">
+                    <input type="text" name="" placeholder="请输入您身份证末六位">
+                    <span class="cancel" @click="infoStatus = false"><img src="images/cancel.png" alt=""></span>
+                    <span class="submit" @click="submitHandle"><img src="images/submit.png" alt=""></span>
+                 </div>
+            </div>
+        </div>
+        
+        <div class="tipBox" v-show="tipStatus">
+            <p>抱歉您还有题目<br>没答完</p>
+        </div>
+    </div>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/loading.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script>
+		//加载资源数组必须在loading之前进行配置
+        var basep = "images/", //图片目录
+            preLoadSource = [ //背景资源
+                //basep + "close.png",
+            ];
+        $(function(){
+            new Vue({
+                el:"#index-box",
+                data:{
+                    "tipStatus":false,
+                    "infoStatus":false,
+                    "slide01Status":true,
+                    "classifyOne":[
+                        {
+                            "title":"您目前所在的机构是:",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'总行'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'分行'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'支行'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'城镇银行'
+                                },
+                            ]
+                        },
+                        {
+                            "title":"您目前的职位是:",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'高层管理人员（总行行领导、部门总经理；分行行长）'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'中高层管理人员（总行部门副总经理、总经理助理；分行副行长、行长助理、风险总监）'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'中层管理人员（总行二级部经理、副经理、经理助理；分行部门总经理、副总经理、总经理助理；支行班子成员；村镇银行班子成员）'
+                                },
+                                {
+                                    "value":"D",
+                                    "title":'基层管理人员（分行二级部经理、副经理、经理助理；支行部门经理、副经理、经理助理；村镇银行部门总经理、副总经理、总经理助理；村镇银行支行班子成员）'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":"普通员工"
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您在我行的工作年限是:",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'1年及以下'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'1-3年'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'4-6年'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'7-10年'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":"10年及以上"
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您的年龄是:",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'26周岁以下'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'26-30周岁'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'31-35周岁'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'36-40周岁'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":"41-45周岁"
+                                },
+                                {
+                                    "value":'F',
+                                    "title":"46周岁及以上"
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您的岗位性质是:",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'前台服务岗位（柜员、客户经理、理财经理）'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'中台支持岗位（除前台和后台以外其他岗位）'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'后台保障岗位（人事、行政、财务、法律、科技）'
+                                }
+                            ]
+                        }
+                    ],
+                    "classifyTwo_one":[
+                        {
+                            "title":"您在我行工作是否有归属感？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很有归属感'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'有归属感'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'几乎没有'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'完全没有'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对目前所在岗位的工作性质和内容是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您在多大程度上愿意将我行的产品及服务介绍给您身边的人？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很愿意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'愿意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不愿意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不愿意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您在多大程度上愿意将我行的工作机会介绍给您身边的人？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很愿意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'愿意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不愿意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不愿意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对您目前所在部门的凝聚力与战斗力是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对您的上级在工作中给您的支持与帮助是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对您与部门内同事沟通的顺畅性是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对您与部门外同事沟通的顺畅性是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        }
+                    ],
+                    "classifyTwo_two":[
+                        {
+                            "title":"您对您目前的薪酬与您所在岗位工作职责的匹配程度是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对您目前的薪酬与您实际工作能力的匹配度是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对目前我行的薪酬调整机制是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对您所在工作岗位的考核目标设定是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对我行现行考核方式对您实际工作绩效的反映程度是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对目前我行考核结果的反馈与应用机制是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        }
+                    ],
+                    "classifyTwo_three":[
+                        {
+                            "title":"您对我行目前的员工发展通道是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对我行对您的个人职业发展所提供的帮助是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对我行为员工提供的发展与晋升机会是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对您目前在我行所取得的个人职业发展成绩是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对您所在机构的员工自我学习与提升的氛围是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对我行战略、制度、流程、产品等信息的传导方式和效率是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        }
+                    ],
+                    "classifyTwo_four":[
+                        {
+                            "title":"您对您目前所在的工作地点（城市）是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对您目前所在工作地点的交通便利性是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对我行的工作环境（硬件设施）是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对我行的工作环境（软件系统）是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        },
+                        {
+                            "title":"您对我行为员工所提供的劳动保护措施是否满意？",
+                            "selectVal":"",
+                            "selectList":[
+                                {
+                                    "value":'A',
+                                    "title":'很满意'
+                                },
+                                {
+                                    "value":'B',
+                                    "title":'满意'
+                                },
+                                {
+                                    "value":'C',
+                                    "title":'一般'
+                                },
+                                {
+                                    "value":'D',
+                                    "title":'不满意'
+                                },
+                                {
+                                    "value":'E',
+                                    "title":'很不满意'
+                                }
+                            ]
+                        }
+                    ]
+
+                },
+                methods:{
+                    submitHandle:function(){
+                        this.infoStatus = false;
+                        this.slide01Status = true;
+                        console.log(tab1)
+                    },
+                    preHandle:function(){
+                        tab1.prev();
+                    },
+                    nextHandle:function(num){
+                        console.log(num)
+                        var That = this;
+                        if(num == 0){
+                            tab1.next()
+                        }
+                        if(num == 1){   //基本信息答题页面
+                            for(var i = 0; i < this.classifyOne.length;i++){
+                                if(this.classifyOne[i].selectVal == ""){
+                                    this.tipStatus = true;
+                                    setTimeout(function(){
+                                        That.tipStatus = false;
+                                    },1000)
+                                    return false;
+                                }
+                            }
+                            tab1.next();
+                        }
+
+                        if(num == 2){   //文化与人际答题页面
+                            for(var i = 0; i < this.classifyTwo_one.length;i++){
+                                if(this.classifyTwo_one[i].selectVal == ""){
+                                    this.tipStatus = true;
+                                    setTimeout(function(){
+                                        That.tipStatus = false;
+                                    },1000)
+                                    return false;
+                                }
+                            }
+                            tab1.next();
+                        }
+
+                        if(num == 3){   //薪酬与考核答题页面
+                            for(var i = 0; i < this.classifyTwo_two.length;i++){
+                                if(this.classifyTwo_two[i].selectVal == ""){
+                                    this.tipStatus = true;
+                                    setTimeout(function(){
+                                        That.tipStatus = false;
+                                    },1000)
+                                    return false;
+                                }
+                            }
+                            tab1.next();
+                        }
+
+                        if(num == 4){   //培训与发展答题页面
+                            for(var i = 0; i < this.classifyTwo_three.length;i++){
+                                if(this.classifyTwo_three[i].selectVal == ""){
+                                    this.tipStatus = true;
+                                    setTimeout(function(){
+                                        That.tipStatus = false;
+                                    },1000)
+                                    return false;
+                                }
+                            }
+                            tab1.next();
+                        }
+                        if(num == 5){   //培训与发展答题页面
+                            for(var i = 0; i < this.classifyTwo_four.length;i++){
+                                if(this.classifyTwo_four[i].selectVal == ""){
+                                    this.tipStatus = true;
+                                    setTimeout(function(){
+                                        That.tipStatus = false;
+                                    },1000)
+                                    return false;
+                                }
+                            }
+                            tab1.next();
+                        }
+                        
+                    },
+                    selectHandle(item,value){
+                        item.selectVal = value;
+                    }
+                },
+                mounted:function(){
+                    window.tab1 = new mo.PageSlide({
+                        target: $('#slide01 .content li'),
+                        touchMove:false,
+                        effect:'slide',
+                        event:{
+                            change:function(){
+                                $('#slide01').find('li').children('.cont').addClass('hide');
+                                $('#slide01').find('li').eq(tab1.curPage).children('.cont').removeClass('hide');
+
+                            }
+                        }
+                    });
+                }
+            })
+        })
+    </script>
+    
+</body>
+</html>
