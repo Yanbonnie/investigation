@@ -15,7 +15,7 @@
             <img class="logo" src="images/logo.png" alt="">
             <img class="niu" src="images/niu.png" alt="">
             <img class="title" src="images/title.png" alt="">
-            <span class="start" @click="infoStatus = true"><img src="images/start.png" alt=""></span>
+            <span class="start" @click="join"><img src="images/start.png" alt=""></span>
         </div>     
         <div id="slide01" class="tabSlide" v-show="slide01Status">					 
             <ul class="content">
@@ -156,8 +156,8 @@
             <div class="html-box info-box">
                  <b class="close" @click="infoStatus = false"></b>
                  <div class="formBox">
-                    <input type="text" name="" placeholder="请输入您的工号">
-                    <input type="text" name="" placeholder="请输入您身份证末六位">
+                    <input type="text" name="" v-model="number" placeholder="请输入您的工号">
+                    <input type="text" name="" v-model="id_num" placeholder="请输入您身份证末六位">
                     <span class="cancel" @click="infoStatus = false"><img src="images/cancel.png" alt=""></span>
                     <span class="submit" @click="submitHandle"><img src="images/submit.png" alt=""></span>
                  </div>
@@ -165,8 +165,8 @@
         </div>
         
         <div class="tipBox" v-show="tipStatus">
-            <p>抱歉您还有题目<br>没答完</p>
-        </div>
+            <p v-html="tipTxt"></p>
+        </div> 
     </div>
     <script src="js/zepto.min.js"></script>
     <script type="text/javascript">
@@ -196,14 +196,17 @@
     <script>
 		//加载资源数组必须在loading之前进行配置
         
-        var isComing = 0;  //0代表false 表示没有参加过答题。 1为true表示已参加过答题
+        var isComing = 0;  //0代表false 表示没有参加过答题。 1为true表示已参加过答题 , 2为已绑定，但未答题
         $(function(){
             new Vue({
                 el:"#index-box",
                 data:{
+                    "tipTxt":"抱歉您还有题目<br>没答完",
                     "tipStatus":false,
                     "infoStatus":false,
                     "slide01Status":false,
+                    "number":"",             //工号
+                    "id_num":"",             //身份证后六位
                     "allSelect":[],
                     //"isComing":isComing,
                     "classifyOne":[
@@ -991,9 +994,57 @@
 
                 },
                 methods:{
+                    join:function(){  //参与调查
+
+                        if (isComing == 0) {
+                            this.infoStatus = true
+                        }
+                        console.log(isComing )
+                        if(isComing == 2){
+                            console.log(111)
+                            this.slide01Status = true;
+                        }
+
+                    },
                     submitHandle:function(){
-                        this.infoStatus = false;
-                        this.slide01Status = true;
+                        var That = this;
+                        if(this.number == "" || this.id_num == ""){
+                            this.tipStatus = true;
+                            this.tipTxt = "请填写<br/>完整信息";
+                            setTimeout(function(){
+                                That.tipStatus = false;
+                            },1000)
+                            return false;
+                        }
+
+                        this.tipStatus = true;
+                        this.tipTxt = "数据<br/>提交中";
+                        $.ajax({
+                                url:'http://wx.xhwxpos.com/questionnaire/index.php?m=Wap&c=Index&a=index&debug=1',
+                                dataType:'json',
+                                type:'post',
+                                data:{
+                                    "number":That.number,
+                                    "id_num":That.id_num
+                                },
+                                async:true,
+                                success:function(res){
+                                    if(res.sta == 0){   //正常
+                                        That.tipStatus = false;    //提示框
+                                        That.infoStatus = false;   //信息框
+                                        That.slide01Status = true;
+                                    }else{     //不正常
+                                        That.tipStatus = true;    //提示框
+                                        That.tipTxt=res.msg;
+                                        setTimeout(function(){
+                                            That.tipStatus = false;
+                                        },1000)
+                                    }                                  
+                                },
+                                error:function(XMLHttpRequest, textStatus, errorThrown) {
+                                    console.log(XMLHttpRequest)
+                                }
+                            })
                         console.log(tab1)
                     },
                     preHandle:function(){
@@ -1009,6 +1060,7 @@
                             for(var i = 0; i < this.classifyOne.length;i++){
                                 if(this.classifyOne[i].selectVal == ""){
                                     this.tipStatus = true;
+                                    this.tipTxt = "抱歉您还有题目<br>没答完";
                                     setTimeout(function(){
                                         That.tipStatus = false;
                                     },1000)
@@ -1066,7 +1118,7 @@
                                     return false;
                                 }
                             }
-                            tab1.next();
+                            //tab1.next();
                             this.allSelectResult();  //计算结果
                         }
                         
@@ -1080,12 +1132,41 @@
                         }
                     },
                     allSelectResult(){
+                        var That = this;
                         this.allSelectHandle(this.classifyOne);
                         this.allSelectHandle(this.classifyTwo_one);
                         this.allSelectHandle(this.classifyTwo_two);
                         this.allSelectHandle(this.classifyTwo_three);
                         this.allSelectHandle(this.classifyTwo_four);
-                        console.log(this.allSelect);
+
+                        this.tipStatus = true;
+                        this.tipTxt = "数据<br/>提交中";
+
+                        var answer = this.allSelect.join(',');
+                        $.ajax({
+                                url:'http://wx.xhwxpos.com/questionnaire/index.php?m=Wap&c=Index&a=ajax_post_login&debug=1',
+                                dataType:'json',
+                                type:'post',
+                                data:{
+                                    "answer":answer,
+                                },
+                                async:true,
+                                success:function(res){
+                                    if(res.sta == 0){   //正常
+                                        That.tipStatus = false;    //提示框
+                                        tab1.next();               //到结果页面
+                                    }else{     //不正常
+                                        That.tipStatus = true;    //提示框
+                                        That.tipTxt=res.msg;
+                                        setTimeout(function(){
+                                            That.tipStatus = false;
+                                        },1000)
+                                    }                                  
+                                },
+                                error:function(XMLHttpRequest, textStatus, errorThrown) {
+                                    console.log(XMLHttpRequest)
+                                }
+                            })
                     }
                 },
                 mounted:function(){
@@ -1094,7 +1175,7 @@
                         $('.index_page').remove();
                         this.slide01Status = true;
                     }
-                    var palyToNum = isComing == 0 ? 0 : 7;                    
+                    var palyToNum = isComing == 0 || isComing == 2 ? 0 : 7;                    
                     window.tab1 = new mo.PageSlide({
                         target: $('#slide01 .content li'),
                         touchMove:false,
