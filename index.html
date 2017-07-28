@@ -156,8 +156,8 @@
             <div class="html-box info-box">
                  <b class="close" @click="infoStatus = false"></b>
                  <div class="formBox">
-                    <input type="text" name="" v-model="number" placeholder="请输入您的工号">
-                    <input type="text" name="" v-model="id_num" placeholder="请输入您身份证末六位">
+                    <input type="number" name="" v-model.number="number" placeholder="请输入您的工号">
+                    <input type="number" name="" v-model.number="id_num" placeholder="请输入您身份证末六位">
                     <span class="cancel" @click="infoStatus = false"><img src="images/cancel.png" alt=""></span>
                     <span class="submit" @click="submitHandle"><img src="images/submit.png" alt=""></span>
                  </div>
@@ -1001,7 +1001,6 @@
                         }
                         console.log(isComing )
                         if(isComing == 2){
-                            console.log(111)
                             this.slide01Status = true;
                         }
 
@@ -1016,6 +1015,14 @@
                             },1000)
                             return false;
                         }
+                        if(this.id_num.toString().length  != 6){
+                            this.tipStatus = true;
+                            this.tipTxt = "请输入<br/>身份证后六位";
+                            setTimeout(function(){
+                                That.tipStatus = false;
+                            },1000)
+                            return false;
+                        }
 
                         this.tipStatus = true;
                         this.tipTxt = "数据<br/>提交中";
@@ -1024,8 +1031,8 @@
                                 dataType:'json',
                                 type:'post',
                                 data:{
-                                    "number":That.number,
-                                    "id_num":That.id_num
+                                    "number":That.number.toString(),
+                                    "id_num":That.id_num.toString()
                                 },
                                 async:true,
                                 success:function(res){
@@ -1045,7 +1052,6 @@
                                     console.log(XMLHttpRequest)
                                 }
                             })
-                        console.log(tab1)
                     },
                     preHandle:function(){
                         tab1.prev();
