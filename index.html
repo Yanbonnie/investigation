@@ -165,7 +165,9 @@
         </div>
         
         <div class="tipBox" v-show="tipStatus">
-            <p v-html="tipTxt"></p>
+            <div class="tibBox_inner">
+                <p v-html="tipTxt"></p>
+            </div>
         </div> 
     </div>
     <script src="js/zepto.min.js"></script>
@@ -995,11 +997,9 @@
                 },
                 methods:{
                     join:function(){  //参与调查
-
                         if (isComing == 0) {
                             this.infoStatus = true
                         }
-                        console.log(isComing )
                         if(isComing == 2){
                             this.slide01Status = true;
                         }
@@ -1057,7 +1057,6 @@
                         tab1.prev();
                     },
                     nextHandle:function(num){
-                        console.log(num)
                         var That = this;
                         if(num == 0){
                             tab1.next()

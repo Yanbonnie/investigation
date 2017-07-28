@@ -144,21 +144,28 @@ img{
     }
 }
 .tipBox{
-    width: REM(300);
-    height: REM(200);
-    background: rgba(0,0,0,0.5);
+    width:100%;
+    height: 100%;
     position:fixed;
-    top: 50%;
-    left: 50%;
-    z-index: 1000;
-    @include prefixer(transform,translate(-50%,-50%));
-    @include prefixer(border-radius,REM(10));
-    p{
-        line-height: REM(45);
-        font-size: REM(30);
-        color: #fff;
-        padding-top:REM(50);
-        text-align: center;
+    z-index: 1001;
+    background:rgba(255,255,255,0);
+    .tibBox_inner{
+        width: REM(300);
+        height: REM(200);
+        background: rgba(0,0,0,0.5);
+        position:fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 1000;
+        @include prefixer(transform,translate(-50%,-50%));
+        @include prefixer(border-radius,REM(10));
+        p{
+            line-height: REM(45);
+            font-size: REM(30);
+            color: #fff;
+            padding-top:REM(50);
+            text-align: center;
+        }
     }
 }
 
