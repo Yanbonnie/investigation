@@ -235,6 +235,13 @@ img{
             margin-left: REMTWO(640);
             margin-top: REMTWO(906);
             background: URL($URL+'paper.png') no-repeat;
+            .font-icon{
+                width: REM(152);
+                height: REM(155);
+                position: absolute;
+                top:-2.5rem;
+                right: 0.5rem;
+            }
             .question_box{
                 width: 70%;
                 margin: 0 auto;

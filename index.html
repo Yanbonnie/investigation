@@ -58,6 +58,7 @@
                 <li class="page4">
                     <div class="cont hide">
                         <div class="question">
+                            <div class="font-icon"><img src="images/font_1.png" alt=""></div>
                             <div class="question_box">
                                 <div class="classify" v-for="(item,index) in classifyTwo_one" :key="index">
                                     <h3>{{(index+6)+'、'}}{{item.title}}</h3>
@@ -78,6 +79,7 @@
                 <li class="page5">
                     <div class="cont hide">
                         <div class="question">
+                            <div class="font-icon"><img src="images/font_2.png" alt=""></div>
                             <div class="question_box">
                                 <div class="classify" v-for="(item,index) in classifyTwo_two" :key="index">
                                     <h3>{{(index+14)+'、'}}{{item.title}}</h3>
@@ -98,6 +100,7 @@
                 <li class="page6">
                     <div class="cont hide">
                         <div class="question">
+                            <div class="font-icon"><img src="images/font_3.png" alt=""></div>
                             <div class="question_box">
                                 <div class="classify" v-for="(item,index) in classifyTwo_three" :key="index">
                                     <h3>{{(index+20)+'、'}}{{item.title}}</h3>
@@ -118,6 +121,7 @@
                 <li class="page7">
                     <div class="cont hide">
                         <div class="question">
+                            <div class="font-icon"><img src="images/font_4.png" alt=""></div>
                             <div class="question_box">
                                 <div class="classify" v-for="(item,index) in classifyTwo_four" :key="index">
                                     <h3>{{(index+26)+'、'}}{{item.title}}</h3>
@@ -165,14 +169,34 @@
         </div>
     </div>
     <script src="js/zepto.min.js"></script>
+    <script type="text/javascript">
+        var basep = "images/", //图片目录
+            preLoadSource = [ //背景资源
+                basep + "ban.png",
+                basep + "cancel.png",
+                basep + "first.png",
+                basep + "form_bg.png",
+                basep + "logo.png",
+                basep + "love.png",
+                basep + "next.png",
+                basep + "next_btn.png",
+                basep + "niu.png",
+                basep + "paper.png",
+                basep + "person.png",
+                basep + "pre.png",
+                basep + "result.png",
+                basep + "second.png",
+                basep + "start.png",
+                basep + "submit.png",
+                basep + "title.png"
+            ];
+    </script>
     <script src="js/loading.js"></script>
     <script src="js/vue.min.js"></script>
     <script>
 		//加载资源数组必须在loading之前进行配置
-        var basep = "images/", //图片目录
-            preLoadSource = [ //背景资源
-                //basep + "close.png",
-            ];
+        
+        var isComing = 0;  //0代表false 表示没有参加过答题。 1为true表示已参加过答题
         $(function(){
             new Vue({
                 el:"#index-box",
@@ -180,6 +204,8 @@
                     "tipStatus":false,
                     "infoStatus":false,
                     "slide01Status":false,
+                    "allSelect":[],
+                    //"isComing":isComing,
                     "classifyOne":[
                         {
                             "title":"您目前所在的机构是:",
@@ -1041,26 +1067,51 @@
                                 }
                             }
                             tab1.next();
+                            this.allSelectResult();  //计算结果
                         }
                         
                     },
                     selectHandle(item,value){
                         item.selectVal = value;
+                    },
+                    allSelectHandle(item){
+                        for(var i = 0; i < item.length;i++){
+                            this.allSelect.push(item[i].selectVal);
+                        }
+                    },
+                    allSelectResult(){
+                        this.allSelectHandle(this.classifyOne);
+                        this.allSelectHandle(this.classifyTwo_one);
+                        this.allSelectHandle(this.classifyTwo_two);
+                        this.allSelectHandle(this.classifyTwo_three);
+                        this.allSelectHandle(this.classifyTwo_four);
+                        console.log(this.allSelect);
                     }
                 },
                 mounted:function(){
+                    var That = this;
+                    if(isComing == 1){
+                        $('.index_page').remove();
+                        this.slide01Status = true;
+                    }
+                    var palyToNum = isComing == 0 ? 0 : 7;                    
                     window.tab1 = new mo.PageSlide({
                         target: $('#slide01 .content li'),
                         touchMove:false,
                         effect:'slide',
+                        playTo:palyToNum,
                         event:{
                             change:function(){
                                 $('#slide01').find('li').children('.cont').addClass('hide');
                                 $('#slide01').find('li').eq(tab1.curPage).children('.cont').removeClass('hide');
-
+                                if(isComing == 1){
+                                    var transY = -(palyToNum*$('body').height())+'px';
+                                    $('#slide01 .content').css({'transform':'translateY('+transY+')'});
+                                }
                             }
                         }
                     });
+                    
                 }
             })
         })
