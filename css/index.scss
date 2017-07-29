@@ -169,7 +169,7 @@ img{
     }
 }
 
-
+ 
 /*上下滑动*/
 #slide01 {position:absolute !important;top: 0;left: 0; width:100%; height:100%;margin: 0 auto;/*background: #fff;*/ z-index: 1000;overflow: hidden;}
 #slide01 .content{overflow: hidden;height: 800%;}
@@ -230,6 +230,20 @@ img{
             margin-left: REMTWO(241);
             top: 50%;
             margin-top: REM(300);
+        }
+        .pre_btn{
+            width: REM(190);
+            position: absolute;
+            left: REM(150);
+            top: 50%;
+            margin-top: REM(400);
+        }
+        .next_btn{
+            width: REM(190);
+            position: absolute;
+            right: REM(150);
+            top: 50%;
+            margin-top: REM(400);
         }
     }
     .page2,.page4,.page5,.page6,.page7{

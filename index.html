@@ -52,7 +52,8 @@
                         <span class="circle wran"></span>
                         <span class="circle2 wran"></span>
                         <img class="part" src="images/second.png" alt="">  
-                        <span class="next-btn" @click="nextHandle(0)"><img src="images/next.png" alt=""></span>        
+                        <span class="pre_btn" @click="preHandle"><img src="images/pre_btn.png" alt=""></span>        
+                        <span class="next_btn" @click="nextHandle(0)"><img src="images/next.png" alt=""></span>        
                     </div>
                 </li>
                 <li class="page4">
@@ -72,8 +73,8 @@
                         </div>
                         <img class="ban" src="images/ban.png" alt="">
                         <img class="person" src="images/person.png" alt="">
-                        <!-- <span class="pre_btn"><img src="images/pre.png" alt=""></span> -->
-                        <span class="next_btn center" @click="nextHandle(2)"><img src="images/next_btn.png" alt=""></span>
+                        <span class="pre_btn" @click="preHandle"><img src="images/pre.png" alt=""></span> 
+                        <span class="next_btn" @click="nextHandle(2)"><img src="images/next_btn.png" alt=""></span>
                     </div>
                 </li>
                 <li class="page5">
@@ -136,7 +137,7 @@
                         <img class="ban" src="images/ban.png" alt="">
                         <img class="person" src="images/person.png" alt="">
                         <span class="pre_btn" @click="preHandle"><img src="images/pre.png" alt=""></span>
-                        <span class="next_btn" @click="nextHandle(5)"><img src="images/next_btn.png" alt=""></span>
+                        <span class="next_btn" @click="nextHandle(5)"><img src="images/tijiao.png" alt=""></span>
                     </div>
                 </li>
                 <li class="page8">
@@ -177,6 +178,10 @@
                 basep + "ban.png",
                 basep + "cancel.png",
                 basep + "first.png",
+                basep + "font_1.png",
+                basep + "font_2.png",
+                basep + "font_3.png",
+                basep + "font_4.png",
                 basep + "form_bg.png",
                 basep + "logo.png",
                 basep + "love.png",
@@ -186,10 +191,12 @@
                 basep + "paper.png",
                 basep + "person.png",
                 basep + "pre.png",
+                basep + "pre_btn.png",
                 basep + "result.png",
                 basep + "second.png",
                 basep + "start.png",
                 basep + "submit.png",
+                basep + "tijiao.png",
                 basep + "title.png"
             ];
     </script>
@@ -1148,6 +1155,7 @@
                         this.tipTxt = "数据<br/>提交中";
 
                         var answer = this.allSelect.join(',');
+                        console.log(this.allSelect)
                         $.ajax({
                                 url:'http://wx.xhwxpos.com/questionnaire/index.php?m=Wap&c=Index&a=ajax_post_login&debug=1',
                                 dataType:'json',
